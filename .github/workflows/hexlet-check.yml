@@ -21,9 +21,6 @@ jobs:
 
       - name: Install uv (with caching)
         uses: astral-sh/setup-uv@v3
-        with:
-          enable-cache: true
-          cache-dependency-path: "pyproject.toml"
 
       - name: Run tests
         run: npm test
