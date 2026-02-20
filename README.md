@@ -17,3 +17,7 @@
 ### Запуск линта
 
 `make lint`
+
+### Ссылка на развернуттое приложение
+
+[link](https://devops-engineer-from-scratch-project-313-s0la.onrender.com)
