@@ -14,6 +14,8 @@ from src.utils.validators import validate_data
 
 app = Flask(__name__)
 
+if os.getenv("PYTEST_CURRENT_TEST") is None:
+    create_db_and_tables()
 
 @app.get("/ping")
 def get_ping():
@@ -77,6 +79,5 @@ def put_link(link_id):
 
 
 if __name__ == "__main__":
-    create_db_and_tables()
     port = int(os.getenv("PORT", 8080))
     app.run(host="0.0.0.0", port=port)
