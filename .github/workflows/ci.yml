@@ -36,7 +36,7 @@ jobs:
           enable-cache: true
           cache-dependency-path: "pyproject.toml"
       - run: uv sync --frozen
-      - run: uv run pytest
+      - run: uv run pytest -v
         name: Run pytest
   build:
     name: Build
