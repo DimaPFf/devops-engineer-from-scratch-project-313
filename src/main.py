@@ -15,14 +15,17 @@ from src.utils.validators import validate_data
 app = Flask(__name__)
 create_db_and_tables()
 
+
 @app.get("/ping")
 def get_ping():
     return "pong"
+
 
 @app.get("/api/links")
 def get_links():
     links = get_all_links()
     return json.jsonify([link.model_dump(mode="json") for link in links])
+
 
 @app.post("/api/links")
 def post_links():
@@ -38,6 +41,7 @@ def post_links():
     )
     return json.jsonify(link.model_dump(mode="json")), 201
 
+
 @app.get("/api/links/<int:link_id>")
 def get_link(link_id):
     link = get_link_by_id(link_id)
@@ -45,11 +49,13 @@ def get_link(link_id):
         return json.jsonify(link.model_dump(mode="json"))
     return json.jsonify({"error": "Not found"}), 404
 
+
 @app.delete("/api/links/<int:link_id>")
 def delete_link_route(link_id):
     if not delete_link(link_id):
         current_app.logger.info("Link %s not found", link_id)
     return "", 204
+
 
 @app.put("/api/links/<int:link_id>")
 def put_link(link_id):
