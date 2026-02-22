@@ -13,4 +13,4 @@ lint-fix:
 	uv run ruff check --fix src
 
 test:
-	uv run pytest
+	uv run pytest -v
