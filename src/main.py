@@ -17,6 +17,7 @@ app = Flask(__name__)
 if os.getenv("PYTEST_CURRENT_TEST") is None:
     create_db_and_tables()
 
+
 @app.get("/ping")
 def get_ping():
     return "pong"

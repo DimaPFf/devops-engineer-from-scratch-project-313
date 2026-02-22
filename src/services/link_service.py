@@ -15,6 +15,10 @@ def get_all_links() -> list[Link]:
 
 def create_link(original_url: str, short_name: str) -> Link:
     with get_session() as session:
+        statement = select(Link).where(Link.short_name == short_name)
+        find_link = session.exec(statement).one()
+        if find_link:
+            return find_link
         link = Link(
             original_url=original_url,
             short_name=short_name,
