@@ -1,5 +1,8 @@
 name: Hexlet CI
 
+env:
+  DATABASE_URL: "sqlite:///:memory:"
+
 on:
   push:
     branches: [main]
