@@ -2,7 +2,7 @@ name: Hexlet CI
 
 env:
   DATABASE_URL: "sqlite:///:memory:"
-  SHORT_URL='https://test.com'
+  SHORT_URL: "https://test.com"
 on:
   push:
     branches: [main]
