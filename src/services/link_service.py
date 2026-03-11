@@ -5,13 +5,14 @@ from sqlmodel import select
 
 from src.database.connect_db import get_session
 from src.database.model_link import Link
-from src.utils.make_short_url import make_short_url
 from src.services.utils.get_range import get_range
+from src.utils.make_short_url import make_short_url
 
 
 def get_all_links() -> list[Link]:
     with get_session() as session:
         return list(session.exec(select(Link)).all())
+
 
 def get_links_with_pagination(range_pagination) -> list[Link]:
     with get_session() as session:
