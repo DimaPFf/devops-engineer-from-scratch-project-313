@@ -8,6 +8,7 @@ from src.services.link_service import (
     delete_link,
     get_all_links,
     get_link_by_id,
+    get_links_with_pagination,
     update_link,
 )
 from src.utils.validators import validate_data
@@ -25,6 +26,11 @@ def get_ping():
 
 @app.get("/api/links")
 def get_links():
+    range_pagination = request.args.get('range')
+    if range_pagination:
+        links = get_links_with_pagination(range_pagination)
+        return json.jsonify([link.model_dump(mode="json") for link in links])
+    
     links = get_all_links()
     return json.jsonify([link.model_dump(mode="json") for link in links])
 
