@@ -17,6 +17,7 @@ def get_all_links() -> list[Link]:
 def get_links_with_pagination(range_pagination) -> list[Link]:
     with get_session() as session:
         range_data = get_range(range_pagination)
+        print(range_data)
         if range_data is None:
             return []
         offset, limit = range_data

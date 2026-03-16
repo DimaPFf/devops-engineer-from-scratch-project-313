@@ -14,3 +14,14 @@ lint-fix:
 
 test:
 	uv run pytest -v
+
+install-front:
+	npm install @hexlet/project-devops-deploy-crud-frontend
+
+start-front:
+	npx start-hexlet-devops-deploy-crud-frontend
+
+start-project:
+	npx concurrently -k -n "FRONT,BACK" -c "blue,green"\
+			"make start-front" \
+			"make start"

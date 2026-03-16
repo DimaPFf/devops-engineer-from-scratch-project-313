@@ -4,6 +4,6 @@ def get_range(range_pagination):
         return None
     if start > end:
         return None
-    offset = start - 1
-    limit = end - start + 1
+    offset = start
+    limit = end - start
     return (offset, limit)

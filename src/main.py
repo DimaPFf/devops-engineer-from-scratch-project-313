@@ -29,8 +29,13 @@ def get_links():
     range_pagination = request.args.get('range')
     if range_pagination:
         links = get_links_with_pagination(range_pagination)
-        return json.jsonify([link.model_dump(mode="json") for link in links])
-    
+        data = json.jsonify([link.model_dump(mode="json") for link in links])
+        headers = {
+                'Content-Range': f'links {range_pagination}/{len(links)}',
+                'Content-Type': 'application/json'
+            }
+        return data, 200, headers
+            
     links = get_all_links()
     return json.jsonify([link.model_dump(mode="json") for link in links])
 
