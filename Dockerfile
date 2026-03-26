@@ -1,27 +1,24 @@
-FROM python:3.12-slim
+FROM python:3.11-slim
 
-# Устанавливаем системные зависимости
 RUN apt-get update && apt-get install -y \
-    make \
-    curl \
+    nginx nodejs npm curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Устанавливаем uv
 RUN pip install uv
 
 WORKDIR /app
 
-# Копируем зависимости
 COPY pyproject.toml uv.lock* ./
-
-# Устанавливаем зависимости
 RUN uv sync --frozen
 
-# Копируем все файлы приложения
+COPY package.json package-lock.json ./
+RUN npm install
+
 COPY . .
+RUN npm run build
+RUN mkdir -p /app/public && cp -r ./node_modules/@hexlet/project-devops-deploy-crud-frontend/dist/. /app/public/
 
-# Настраиваем переменные окружения
-ENV FLASK_APP=src.main
+COPY nginx.conf /etc/nginx/sites-available/default
 
-# Запускаем приложение через make start-prod
-CMD make start-prod
+# Запускаем nginx в фоне и flask на переднем плане
+CMD service nginx start && uv run flask run --host=0.0.0.0 --port=$FLASK_PORT

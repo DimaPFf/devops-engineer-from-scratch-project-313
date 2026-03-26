@@ -4,7 +4,7 @@ start:
 	FLASK_APP=src.main uv run flask run --port 8080 --debug
 
 start-prod:
-	FLASK_APP=src.main sh -c 'uv run flask run --host=0.0.0.0 --port=$$PORT'
+	FLASK_APP=src.main sh -c 'uv run flask run --host=0.0.0.0 --port=$$FALSK_PORT'
 
 lint:
 	uv run ruff check src
